@@ -21,6 +21,16 @@
       ::-webkit-scrollbar-track { background: #080808; }
       ::-webkit-scrollbar-thumb { background: #C73D4C; border-radius: 2px; }
       ::selection { background: #C73D4C; color: #fff; }
+
+      canvas, svg, img {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
     </style>
   </head>
   <body>

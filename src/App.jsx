@@ -253,6 +253,9 @@ function Hero() {
               lineHeight: 1.1,
               width: "max-content",
               minWidth: "200vw",
+              willChange: "transform",      
+              transform: "translateZ(0)",     
+              backfaceVisibility: "hidden",
             }}
           >
             流れ  ·  प्रवाह  ·  FLOW  ·  흐름  ·  تدفق  ·  流れ  ·  प्रवाह  ·  FLOW  ·  흐름  ·  تدفق  ·  流れ  ·  प्रवाह  ·  FLOW  ·  흐름  ·  تدفق  ·
@@ -270,7 +273,9 @@ function Hero() {
     scale: imageScale,
     display: "flex",
     justifyContent: "center",
-    alignItems: isMobile ? "center" : "flex-end", // 🔥 move upward on mobile
+    alignItems: isMobile ? "center" : "flex-end",
+    willChange: "transform",   
+    transform: "translateZ(0)", // 🔥 move upward on mobile
   }}
 >
   <img
@@ -395,7 +400,7 @@ function FadeIn({ children, delay = 0, y = 40, style = {} }) {
       ref={ref}
       initial={{ opacity: 0, y }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.7, delay, ease: "easeOut" }}
       style={style}
     >
       {children}
@@ -487,7 +492,7 @@ function Lightning() {
     const generateBolt = (id) => {
       const startX = 10 + Math.random() * 80;
       const startAngle = (Math.random() - 0.5) * 20; // mostly downward, slight tilt
-      const maxDepth = 3;
+      const maxDepth = 2;
       const segmentLength = 8 + Math.random() * 6;
       const paths = generateBranch(startX, 0, startAngle, 0, maxDepth, segmentLength);
   
@@ -534,7 +539,8 @@ function Lightning() {
         <svg
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%",willChange: "transform",   
+          transform: "translateZ(0)", }}
         >
           <defs>
             <filter id="lg1" x="-50%" y="-50%" width="200%" height="200%">
@@ -1371,7 +1377,8 @@ function Contact() {
 // ── ROOT APP ───────────────────────────────────────────────────────────────────
 export default function App() {
   return (
-    <div style={{ background: C.bg, minHeight: "100vh", color: C.white, overflowX: "hidden" }}>
+    <div style={{ background: C.bg, minHeight: "100vh", color: C.white, overflowX: "hidden",isolation: "isolate",      // ← ADD — creates new stacking context
+    contain: "paint", }}>
       <Nav />
       <Hero />
       <div style={{ borderTop: `1px solid ${C.border}` }}>
