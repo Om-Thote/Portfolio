@@ -27,18 +27,7 @@ function useBreakpoint() {
       width,
     };
   }
-
-  const [isMobile, setIsMobile] = useState(false);
-
-useEffect(() => {
-  const handleResize = () => {
-    setIsMobile(window.innerWidth < 768);
-  };
-
-  handleResize();
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
+  
 
 // ── THEME ───────────────────────────────────────────────────────────────────
 const C = {
@@ -220,6 +209,7 @@ function Hero() {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const { isMobile } = useBreakpoint(); 
 
   return (
     <section
