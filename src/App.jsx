@@ -260,26 +260,31 @@ function Hero() {
 
       {/* Anime image — full height, centered */}
       <motion.div
-        style={{
-          position: "absolute", inset: 0, zIndex: 2,
-          y: imageY, scale: imageScale,
-          display: "flex", justifyContent: "center", alignItems: "flex-end",
-        }}
-      >
-        <img
-          src="/anime.svg"
-          alt="Om Thote"
-          style={{
-            height: "100%",
-            width: "auto",
-            maxWidth: "100%",
-            objectFit: "contain",
-            objectPosition: "bottom center",
-            userSelect: "none",
-            filter: "drop-shadow(0 0 60px rgba(199,61,76,0.25))",
-          }}
-        />
-      </motion.div>
+  style={{
+    position: "absolute",
+    inset: 0,
+    zIndex: 2,
+    y: imageY,
+    scale: imageScale,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-end",
+  }}
+>
+<img
+  src="/anime.svg"
+  alt="Om Thote"
+  style={{
+    height: "100%",          // ✅ big screens stay full height
+    width: "auto",
+    maxWidth: "min(90vw, 100%)",  // ✅ prevents shrinking on desktop
+    objectFit: "contain",
+    objectPosition: "bottom center",
+    userSelect: "none",
+    filter: "drop-shadow(0 0 60px rgba(199,61,76,0.25))",
+  }}
+/>
+</motion.div>
 
       {/* Overlay gradient at bottom */}
       <div style={{
