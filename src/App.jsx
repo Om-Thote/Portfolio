@@ -319,8 +319,10 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
           style={{
-            fontFamily: "'Space Mono'", fontSize: "0.75rem",
-            letterSpacing: "0.3em", color: C.white, backgroundColor: C.red,
+            fontFamily: "'Space Mono'", 
+            fontSize: "clamp(0.65rem, 2vw, 0.9rem)", // responsive
+            letterSpacing: "clamp(0.15em, 0.8vw, 0.3em)",
+            color: C.white, backgroundColor: C.red,
             textTransform: "uppercase", marginBottom: "0.75rem",
             textShadow: "0px 8px 25px rgba(0,0,0,1)",
           }}
