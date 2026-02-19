@@ -28,6 +28,18 @@ function useBreakpoint() {
     };
   }
 
+  const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  handleResize();
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
 // ── THEME ───────────────────────────────────────────────────────────────────
 const C = {
   bg: "#080808",
@@ -268,22 +280,23 @@ function Hero() {
     scale: imageScale,
     display: "flex",
     justifyContent: "center",
-    alignItems: "flex-end",
+    alignItems: isMobile ? "center" : "flex-end", // 🔥 move upward on mobile
   }}
 >
-<img
-  src="/anime.svg"
-  alt="Om Thote"
-  style={{
-    height: "100%",          // ✅ big screens stay full height
-    width: "auto",
-    maxWidth: "min(90vw, 100%)",  // ✅ prevents shrinking on desktop
-    objectFit: "contain",
-    objectPosition: "bottom center",
-    userSelect: "none",
-    filter: "drop-shadow(0 0 60px rgba(199,61,76,0.25))",
-  }}
-/>
+  <img
+    src="/anime.svg"
+    alt="Om Thote"
+    style={{
+      height: isMobile ? "85vh" : "100%", // 🔥 bigger on mobile
+      width: "auto",
+      maxWidth: "100%",
+      objectFit: "contain",
+      objectPosition: isMobile ? "center" : "bottom center",
+      userSelect: "none",
+      filter: "drop-shadow(0 0 60px rgba(199,61,76,0.25))",
+      transform: isMobile ? "translateY(-40px)" : "none", // 🔥 push upward
+    }}
+  />
 </motion.div>
 
       {/* Overlay gradient at bottom */}
